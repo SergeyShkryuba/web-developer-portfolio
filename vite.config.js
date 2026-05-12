@@ -1,9 +1,13 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import tailwindcss from '@tailwindcss/vite';
+import { htmlInjectPlugin } from './vite-plugins/html-inject.js';
 
 export default defineConfig({
-  plugins: [tailwindcss()],
+  plugins: [
+    tailwindcss(),
+    htmlInjectPlugin()
+  ],
   resolve: {
     alias: {
       '@app': resolve(__dirname, 'src/app'),
