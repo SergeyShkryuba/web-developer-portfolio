@@ -1,7 +1,7 @@
 ---
 name: Task
 about: A unit of work for the portfolio site
-title: '[TASK-XX] Short verb-led title'
+title: 'Short verb-led title'
 labels: ''
 assignees: ''
 ---

@@ -8,8 +8,8 @@ _If the change is visual, attach before/after screenshots or a short screen reco
 Closes #
 
 ## Pre-review checklist
-- [ ] Branch name is `TASK-<N>/short-summary` (kebab-case after the slash)
-- [ ] Every commit follows `[TASK-<N>] <type>: <subject>` in English
+- [ ] Branch name is `<id>-<task-title>` in kebab-case (e.g. `31-hero-section`)
+- [ ] Every commit follows `<type>: <subject>` in English
 - [ ] PR title and description are in English
 - [ ] `npm run build` succeeds locally
 - [ ] No leftover `console.log`, dead code, or `TODO:` without a referenced ticket
