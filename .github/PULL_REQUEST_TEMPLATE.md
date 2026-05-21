@@ -9,7 +9,7 @@ Closes #
 
 ## Pre-review checklist
 - [ ] Branch name is `<id>-<task-title>` in kebab-case (e.g. `31-hero-section`)
-- [ ] Every commit follows `<type>: <subject>` in English
+- [ ] Commit messages are in English and describe the change
 - [ ] PR title and description are in English
 - [ ] `npm run build` succeeds locally
 - [ ] No leftover `console.log`, dead code, or `TODO:` without a referenced ticket
