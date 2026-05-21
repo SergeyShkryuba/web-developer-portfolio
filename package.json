@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.0",
+    "husky": "^9.1.7",
     "sass": "^1.99.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
