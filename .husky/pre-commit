@@ -7,19 +7,19 @@ fi
 if [ "$branch" = "main" ]; then
   printf '\n\033[1;31m✘ Direct commits to "main" are not allowed.\033[0m\n\n' >&2
   printf '  Create a task branch and open a PR:\n' >&2
-  printf '    git switch -c TASK-<N>/short-summary\n\n' >&2
+  printf '    git switch -c <id>-<task-title>\n\n' >&2
   printf '  See CONTRIBUTING.md → "Branching".\n\n' >&2
   exit 1
 fi
 
-format='^TASK-[0-9]+/[a-z0-9]+(-[a-z0-9]+)*$'
+format='^[0-9]+-[a-z0-9]+(-[a-z0-9]+)*$'
 
 if ! printf '%s' "$branch" | grep -Eq "$format"; then
   printf '\n\033[1;31m✘ Branch name "%s" does not match the required format.\033[0m\n\n' "$branch" >&2
-  printf '  Expected: TASK-<N>/short-summary-in-kebab-case\n' >&2
-  printf '  Example:  TASK-09/hero-section\n\n' >&2
+  printf '  Expected: <id>-<task-title-in-kebab-case>\n' >&2
+  printf '  Example:  31-hero-section\n\n' >&2
   printf '  Rename with:\n' >&2
-  printf '    git branch -m TASK-<N>/short-summary\n\n' >&2
+  printf '    git branch -m <id>-<task-title>\n\n' >&2
   printf '  See CONTRIBUTING.md → "Branching".\n\n' >&2
   exit 1
 fi

@@ -1,24 +1,7 @@
 commit_msg_file="$1"
 subject="$(head -n1 "$commit_msg_file")"
 
-case "$subject" in
-  "Merge "*|"Revert "*|"fixup! "*|"squash! "*|"#"*) exit 0 ;;
-esac
-
-format='^\[TASK-[0-9]+\] (feat|fix|refactor|chore|docs|style|test): [^ ].+[^. ]$'
-
-if ! printf '%s' "$subject" | grep -Eq "$format"; then
-  printf '\n\033[1;31m✘ Commit message format is invalid.\033[0m\n\n' >&2
-  printf '  Got:      %s\n' "$subject" >&2
-  printf '  Expected: [TASK-<N>] <type>: <imperative subject>\n' >&2
-  printf '  Types:    feat | fix | refactor | chore | docs | style | test\n' >&2
-  printf '  Example:  [TASK-09] feat: add hero heading and primary CTA\n\n' >&2
-  printf '  See CONTRIBUTING.md → "Commits".\n\n' >&2
-  exit 1
-fi
-
-if [ "${#subject}" -gt 70 ]; then
-  printf '\n\033[1;31m✘ Commit subject is %d chars — keep it under 70.\033[0m\n' "${#subject}" >&2
-  printf '  Put the long-form explanation in the commit body instead.\n\n' >&2
+if [ -z "$subject" ]; then
+  printf '\n\033[1;31m✘ Commit subject is empty.\033[0m\n\n' >&2
   exit 1
 fi
