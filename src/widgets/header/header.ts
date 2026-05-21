@@ -34,7 +34,7 @@ export class Header {
     });
 
     document.addEventListener('click', (e) => {
-      if (this.header && !this.header.contains(e.target as Node)) {
+      if (this.header && !this.header.contains(e.target as Node) && !this.mobileMenu?.contains(e.target as Node)) {
         this.closeMenu();
       }
     });
