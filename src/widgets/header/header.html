@@ -1,0 +1,56 @@
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <a href="/" class="text-2xl font-bold text-blue-600 hover:opacity-80 transition-opacity">
+                Multi
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-1">
+                <a href="/" 
+                   class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors relative group"
+                   data-page="home">
+                    Home
+                    <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                </a>
+                
+                <div class="relative group">
+                    <a href="/pages/about.html" 
+                       class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors flex items-center gap-1 relative"
+                       data-page="about">
+                        About
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                        <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                    </a>
+                    <div class="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 py-2">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Our Team</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">History</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600">Careers</a>
+                    </div>
+                </div>
+
+                <a href="/pages/contact.html" 
+                   class="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors relative group"
+                   data-page="contact">
+                    Contact
+                    <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                </a>
+            </nav>
+
+            <button class="md:hidden p-2 space-y-1.5" aria-label="Menu" id="burger">
+                <span class="block w-6 h-0.5 bg-gray-700 transition-transform"></span>
+                <span class="block w-6 h-0.5 bg-gray-700 transition-opacity"></span>
+                <span class="block w-6 h-0.5 bg-gray-700 transition-transform"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="md:hidden hidden" id="mobile-menu">
+        <div class="px-4 py-3 space-y-1 bg-white border-t">
+            <a href="/" class="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium" data-page="home">Home</a>
+            <a href="/pages/about.html" class="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium" data-page="about">About</a>
+            <a href="/pages/contact.html" class="block px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium" data-page="contact">Contact</a>
+        </div>
+    </div>
+</header>
