@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const partials = {
   header: 'src/widgets/header/header.html',
-  footer: 'src/shared/ui/footer.html',
+  footer: 'src/widgets/footer/footer.html',
 };
 
 export function htmlInjectPlugin() {
