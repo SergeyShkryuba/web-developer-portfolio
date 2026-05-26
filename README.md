@@ -1,4 +1,4 @@
-# Multi — Personal Portfolio Site
+# WebFolio — Personal Portfolio Site
 
 A modern, responsive portfolio website built with Vite, TypeScript, and Tailwind CSS. Currently a work-in-progress foundation; the goal is to turn this into a fully-featured portfolio that showcases your work, skills, and experience.
 
