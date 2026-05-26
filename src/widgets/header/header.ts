@@ -56,6 +56,9 @@ export class Header {
     if (!pageName) {
       const path = window.location.pathname;
       if (path.includes('about')) pageName = 'about';
+      else if (path.includes('skills')) pageName = 'skills';
+      else if (path.includes('projects')) pageName = 'projects';
+      else if (path.includes('experience')) pageName = 'experience';
       else if (path.includes('contact')) pageName = 'contact';
       else pageName = 'home';
     }
