@@ -44,6 +44,8 @@ The site will be available at `http://localhost:5173` (or the URL shown in your 
 
 This project uses **Feature-Sliced Design (FSD)**, organizing code into layers: `app` (core app logic), `pages` (page components), `widgets` (reusable UI blocks), `features` (user-facing functionality), `entities` (domain models), and `shared` (utilities, config, styles). Each layer only imports from lower layers, keeping dependencies clear and preventing circular imports.
 
+See [docs/architecture.md](./docs/architecture.md) for a detailed explanation of each layer and import rules.
+
 ## How to contribute
 
 Each task is tracked as a GitHub issue. Check the issue for what needs to be done, create a feature branch, make changes following the FSD layout, and open a pull request.
