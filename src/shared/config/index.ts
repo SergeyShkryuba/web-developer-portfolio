@@ -1,4 +1,4 @@
 export const CONFIG = {
-  APP_NAME: 'Multi',
+  APP_NAME: 'WebFolio',
   VERSION: '1.0.0',
 };
