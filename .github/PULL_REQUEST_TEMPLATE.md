@@ -1,13 +1,17 @@
 ## What this PR does
+
 One paragraph in your own words.
 
 ## Screenshots / video
+
 _If the change is visual, attach before/after screenshots or a short screen recording._
 
 ## Related issue
+
 Closes #
 
 ## Pre-review checklist
+
 - [ ] Branch name is `<id>-<task-title>` in kebab-case (e.g. `31-hero-section`)
 - [ ] Commit messages are in English and describe the change
 - [ ] PR title and description are in English
