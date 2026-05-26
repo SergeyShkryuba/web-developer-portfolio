@@ -5,11 +5,13 @@ Thank you for contributing! Here's how to work on this project.
 ## Before you push
 
 1. **Format your code:**
+
    ```bash
    npm run format
    ```
 
 2. **Check for lint errors:**
+
    ```bash
    npm run lint
    ```
@@ -28,6 +30,7 @@ Example: `15-add-hero-section`, `23-fix-header-bug`
 ## Commit messages
 
 Use conventional commits format:
+
 - `feat(scope): description` — for new features
 - `fix(scope): description` — for bug fixes
 - `docs(scope): description` — for documentation
