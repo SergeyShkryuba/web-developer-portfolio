@@ -62,6 +62,9 @@ export async function loadProjects(containerSelector: string): Promise<void> {
 function buildFeaturedCard(project: Project): HTMLElement {
   const article = document.createElement('article');
   article.className = 'project project--featured';
+  article.tabIndex = 0;
+  article.setAttribute('role', 'button');
+  article.setAttribute('aria-label', `Open details for ${project.title}`);
 
   const preview = document.createElement('div');
   preview.className = 'project__preview';
@@ -106,6 +109,14 @@ function buildFeaturedCard(project: Project): HTMLElement {
   body.appendChild(tags);
   body.appendChild(links);
 
+  const open = () => window.openProjectModal(article, { title: project.title, description: project.description });
+  article.addEventListener('click', open);
+  article.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+
+  const open = () => window.openProjectModal(article, { title: project.title, description: project.description });
+  article.addEventListener('click', open);
+  article.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+
   article.appendChild(preview);
   article.appendChild(body);
 
@@ -115,6 +126,9 @@ function buildFeaturedCard(project: Project): HTMLElement {
 function buildCard(project: Project): HTMLElement {
   const article = document.createElement('article');
   article.className = 'project';
+  article.tabIndex = 0;
+  article.setAttribute('role', 'button');
+  article.setAttribute('aria-label', `Open details for ${project.title}`);
 
   const preview = document.createElement('div');
   preview.className = 'project__preview';
