@@ -68,7 +68,9 @@ export class ContactForm {
     if (!errorEl) {
       errorEl = document.createElement('p');
       errorEl.className = 'field-error text-sm text-red-400 mt-1';
+      errorEl.id = `${field.name}-error`;
       container.appendChild(errorEl);
+      field.setAttribute('aria-describedby', errorEl.id);
     }
     errorEl.textContent = error;
     field.setAttribute('aria-invalid', error ? 'true' : 'false');
@@ -94,10 +96,17 @@ export class ContactForm {
     if (this.state.isSubmitting) return;
 
     let isValid = true;
+    let firstInvalid: HTMLInputElement | HTMLTextAreaElement | null = null;
     Object.values(this.fields).forEach((field) => {
-      if (!this.validateField(field)) isValid = false;
+      if (!this.validateField(field)) {
+        isValid = false;
+        if (!firstInvalid) firstInvalid = field;
+      }
     });
-    if (!isValid) return;
+    if (!isValid) {
+      firstInvalid?.focus();
+      return;
+    }
 
     this.state.isSubmitting = true;
     this.state.formError = null;
@@ -117,8 +126,14 @@ export class ContactForm {
   }
 
   private mockSubmit(): Promise<void> {
-    return new Promise((resolve) => {
-      setTimeout(resolve, 1500);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.5) {
+          resolve();
+        } else {
+          reject();
+        }
+      }, 1500);
     });
   }
 
