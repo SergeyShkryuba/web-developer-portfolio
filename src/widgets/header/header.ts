@@ -34,22 +34,33 @@ export class Header {
     });
 
     document.addEventListener('click', (e) => {
-      if (this.header && !this.header.contains(e.target as Node)) {
+      if (
+        this.header &&
+        !this.header.contains(e.target as Node) &&
+        !this.mobileMenu?.contains(e.target as Node)
+      ) {
         this.closeMenu();
       }
     });
   }
 
   private toggleMenu(): void {
+    const isOpen = !this.mobileMenu?.classList.contains('hidden');
     this.mobileMenu?.classList.toggle('hidden');
     this.burger?.classList.toggle('active');
     document.body.classList.toggle('menu-open');
+    if (this.burger) {
+      this.burger.setAttribute('aria-expanded', String(!isOpen));
+    }
   }
 
   private closeMenu(): void {
     this.mobileMenu?.classList.add('hidden');
     this.burger?.classList.remove('active');
     document.body.classList.remove('menu-open');
+    if (this.burger) {
+      this.burger.setAttribute('aria-expanded', 'false');
+    }
   }
 
   private setActivePage(pageName?: string): void {
