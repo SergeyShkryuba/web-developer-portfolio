@@ -3,14 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About</title>
+    <title>About — WebFolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- inject:header -->
 
-    <main class="container mx-auto p-8 pt-20">
-      <h1 class="text-4xl font-bold mb-4">About Page</h1>
-      <p class="text-gray-700">About us content</p>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
+      <h1 class="text-5xl md:text-6xl font-display font-bold text-ink mb-8">About me</h1>
+
+      <article class="grid md:grid-cols-[280px_1fr] gap-10">
+        <figure class="shrink-0">
+          <div
+            class="w-full aspect-square bg-surface border-2 border-accent rounded-md flex items-center justify-center text-muted font-body"
+          >
+            Photo
+          </div>
+          <figcaption class="sr-only">Profile photo placeholder</figcaption>
+        </figure>
+
+        <div class="space-y-6">
+          <p class="text-lg text-ink leading-relaxed">
+            Junior web developer from Kyiv, Ukraine. Building accessible, performant websites
+            and learning something new every day.
+          </p>
+
+          <section>
+            <h2 class="text-2xl font-display font-bold text-ink mb-4">Quick facts</h2>
+            <dl class="grid sm:grid-cols-2 gap-4">
+              <div class="bg-surface border border-line rounded-md p-4">
+                <dt class="text-sm uppercase tracking-wide text-muted font-medium">Experience</dt>
+                <dd class="text-xl font-display font-bold text-accent mt-1">1+ year</dd>
+              </div>
+              <div class="bg-surface border border-line rounded-md p-4">
+                <dt class="text-sm uppercase tracking-wide text-muted font-medium">Location</dt>
+                <dd class="text-xl font-display font-bold text-accent mt-1">Kyiv, Ukraine</dd>
+              </div>
+              <div class="bg-surface border border-line rounded-md p-4">
+                <dt class="text-sm uppercase tracking-wide text-muted font-medium">Languages</dt>
+                <dd class="text-xl font-display font-bold text-accent mt-1">English, Ukrainian</dd>
+              </div>
+              <div class="bg-surface border border-line rounded-md p-4">
+                <dt class="text-sm uppercase tracking-wide text-muted font-medium">Focus</dt>
+                <dd class="text-xl font-display font-bold text-accent mt-1">Frontend</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+      </article>
     </main>
 
     <!-- inject:footer -->
