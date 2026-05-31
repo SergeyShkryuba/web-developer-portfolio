@@ -1,0 +1,38 @@
+[
+  {
+    "id": "warm-corner",
+    "title": "Warm Corner coffee shop landing",
+    "description": "A responsive one-page site built from scratch: semantic markup, smooth scrolling, mobile menu. Made to lock in Flexbox and Grid on a real task.",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "links": {
+      "demo": "#",
+      "source": "#"
+    },
+    "featured": true,
+    "previewLabel": "Landing"
+  },
+  {
+    "id": "task-list",
+    "title": "Task list app",
+    "description": "A vanilla JavaScript app: add, remove and persist tasks in localStorage.",
+    "tags": ["JavaScript", "localStorage"],
+    "links": {
+      "demo": "#",
+      "source": "#"
+    },
+    "featured": false,
+    "previewLabel": "To-Do"
+  },
+  {
+    "id": "weather-widget",
+    "title": "Weather widget",
+    "description": "Pulls weather data from a public API and shows the forecast by city. A drill on working with fetch.",
+    "tags": ["JavaScript", "API"],
+    "links": {
+      "demo": "#",
+      "source": "#"
+    },
+    "featured": false,
+    "previewLabel": "Weather"
+  }
+]
