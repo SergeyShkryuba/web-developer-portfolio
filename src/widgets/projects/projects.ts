@@ -6,6 +6,7 @@ interface Project {
   links: { demo: string; source: string };
   featured: boolean;
   previewLabel: string;
+  preview?: string;
 }
 
 export async function loadProjects(containerSelector: string): Promise<void> {
@@ -69,7 +70,15 @@ function buildFeaturedCard(project: Project): HTMLElement {
   const preview = document.createElement('div');
   preview.className = 'project__preview';
   preview.setAttribute('aria-hidden', 'true');
-  preview.textContent = project.previewLabel;
+  if (project.preview) {
+    const img = document.createElement('img');
+    img.src = project.preview;
+    img.alt = project.previewLabel;
+    img.className = 'project__preview-img';
+    preview.appendChild(img);
+  } else {
+    preview.textContent = project.previewLabel;
+  }
 
   const body = document.createElement('div');
   body.className = 'project__body';
@@ -93,13 +102,23 @@ function buildFeaturedCard(project: Project): HTMLElement {
   const links = document.createElement('div');
   links.className = 'project__links';
 
+  const isExternal = project.links.demo.startsWith('http');
+
   const demoLink = document.createElement('a');
   demoLink.href = project.links.demo;
-  demoLink.textContent = 'Live demo →';
+  demoLink.textContent = isExternal ? 'Live demo ↗' : 'Live demo →';
+  if (isExternal) {
+    demoLink.target = '_blank';
+    demoLink.rel = 'noopener noreferrer';
+  }
 
   const sourceLink = document.createElement('a');
   sourceLink.href = project.links.source;
   sourceLink.textContent = 'GitHub →';
+  if (project.links.source.startsWith('http')) {
+    sourceLink.target = '_blank';
+    sourceLink.rel = 'noopener noreferrer';
+  }
 
   links.appendChild(demoLink);
   links.appendChild(sourceLink);
@@ -110,7 +129,10 @@ function buildFeaturedCard(project: Project): HTMLElement {
   body.appendChild(links);
 
   const open = () => window.openProjectModal(article, { title: project.title, description: project.description });
-  article.addEventListener('click', open);
+  article.addEventListener('click', (e) => {
+    if (e.target instanceof HTMLElement && e.target.closest('a')) return;
+    open();
+  });
   article.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
 
   article.appendChild(preview);
@@ -129,7 +151,15 @@ function buildCard(project: Project): HTMLElement {
   const preview = document.createElement('div');
   preview.className = 'project__preview';
   preview.setAttribute('aria-hidden', 'true');
-  preview.textContent = project.previewLabel;
+  if (project.preview) {
+    const img = document.createElement('img');
+    img.src = project.preview;
+    img.alt = project.previewLabel;
+    img.className = 'project__preview-img';
+    preview.appendChild(img);
+  } else {
+    preview.textContent = project.previewLabel;
+  }
 
   const body = document.createElement('div');
   body.className = 'project__body';
@@ -153,13 +183,23 @@ function buildCard(project: Project): HTMLElement {
   const links = document.createElement('div');
   links.className = 'project__links';
 
+  const isExternal = project.links.demo.startsWith('http');
+
   const demoLink = document.createElement('a');
   demoLink.href = project.links.demo;
-  demoLink.textContent = 'Live demo →';
+  demoLink.textContent = isExternal ? 'Live demo ↗' : 'Live demo →';
+  if (isExternal) {
+    demoLink.target = '_blank';
+    demoLink.rel = 'noopener noreferrer';
+  }
 
   const sourceLink = document.createElement('a');
   sourceLink.href = project.links.source;
   sourceLink.textContent = 'Code →';
+  if (project.links.source.startsWith('http')) {
+    sourceLink.target = '_blank';
+    sourceLink.rel = 'noopener noreferrer';
+  }
 
   links.appendChild(demoLink);
   links.appendChild(sourceLink);
@@ -168,6 +208,13 @@ function buildCard(project: Project): HTMLElement {
   body.appendChild(desc);
   body.appendChild(tags);
   body.appendChild(links);
+
+  const open = () => window.openProjectModal(article, { title: project.title, description: project.description });
+  article.addEventListener('click', (e) => {
+    if (e.target instanceof HTMLElement && e.target.closest('a')) return;
+    open();
+  });
+  article.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
 
   article.appendChild(preview);
   article.appendChild(body);

@@ -12,16 +12,17 @@
     "previewLabel": "Landing"
   },
   {
-    "id": "task-list",
-    "title": "Task list app",
-    "description": "A vanilla JavaScript app: add, remove and persist tasks in localStorage.",
-    "tags": ["JavaScript", "localStorage"],
+    "id": "modern-js-todo",
+    "title": "Modern JS Todo",
+    "description": "A feature-rich todo app with dark mode, local storage persistence, task filtering by priority and category, search, and edit functionality. Built with vanilla JavaScript.",
+    "tags": ["JavaScript", "LocalStorage", "Dark Mode", "DOM"],
     "links": {
-      "demo": "#",
-      "source": "#"
+      "demo": "https://sergeyshkryuba.github.io/modern-js-todo/",
+      "source": "https://github.com/SergeyShkryuba/modern-js-todo"
     },
     "featured": false,
-    "previewLabel": "To-Do"
+    "previewLabel": "To-Do",
+    "preview": "/projects/todo-preview.png"
   },
   {
     "id": "weather-widget",
