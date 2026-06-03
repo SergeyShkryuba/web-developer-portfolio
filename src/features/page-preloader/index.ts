@@ -1,0 +1,1 @@
+export { initPreloader } from './preloader';
