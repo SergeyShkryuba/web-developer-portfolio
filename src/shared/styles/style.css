@@ -20,7 +20,7 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-theme='light'] {
+.light {
   --color-bg: oklch(0.98 0.002 260);
   --color-surface: oklch(0.96 0.003 260);
   --color-surface-2: oklch(0.93 0.004 260);
