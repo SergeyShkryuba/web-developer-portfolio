@@ -1,66 +1,40 @@
-type Theme = 'light' | 'dark';
-
 const STORAGE_KEY = 'theme';
 
-function getPreferredTheme(): Theme {
-  const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-  if (stored) {
-    return stored;
-  }
-
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-}
-
-function applyTheme(theme: Theme): void {
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem(STORAGE_KEY, theme);
+function applyTheme(isLight: boolean): void {
+  document.documentElement.classList.toggle('light', isLight);
+  localStorage.setItem(STORAGE_KEY, isLight ? 'light' : 'dark');
+  updateButtonIcon(isLight);
 }
 
 function toggleTheme(): void {
-  const current = document.documentElement.getAttribute('data-theme') as Theme || 'dark';
-  const next: Theme = current === 'dark' ? 'light' : 'dark';
-  applyTheme(next);
-  updateButtonIcon(next);
+  const isLight = document.documentElement.classList.toggle('light');
+  localStorage.setItem(STORAGE_KEY, isLight ? 'light' : 'dark');
+  updateButtonIcon(isLight);
 }
 
-function updateButtonIcon(theme: Theme): void {
-  const buttons = [
-    document.getElementById('theme-toggle'),
-    document.getElementById('theme-toggle-mobile')
-  ];
-
+function updateButtonIcon(isLight: boolean): void {
+  const buttons = document.querySelectorAll<HTMLButtonElement>('#theme-toggle, #theme-toggle-mobile');
   buttons.forEach(button => {
-    if (!button) return;
-
     const icon = button.querySelector('span');
-    if (!icon) return;
-
-    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-    button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    if (icon) icon.textContent = isLight ? '🌙' : '☀️';
+    button.setAttribute('aria-label', `Switch to ${isLight ? 'dark' : 'light'} mode`);
   });
 }
 
 export function initThemeSwitcher(): void {
-  const theme = getPreferredTheme();
-  applyTheme(theme);
-  updateButtonIcon(theme);
+  const stored = localStorage.getItem(STORAGE_KEY);
+  const prefersLight = stored 
+    ? stored === 'light' 
+    : window.matchMedia('(prefers-color-scheme: light)').matches;
 
-  const buttons = [
-    document.getElementById('theme-toggle'),
-    document.getElementById('theme-toggle-mobile')
-  ];
+  applyTheme(prefersLight);
 
-  buttons.forEach(button => {
-    if (button) {
-      button.addEventListener('click', toggleTheme);
-    }
-  });
+  const buttons = document.querySelectorAll<HTMLButtonElement>('#theme-toggle, #theme-toggle-mobile');
+  buttons.forEach(button => button.addEventListener('click', toggleTheme));
 
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
     if (!localStorage.getItem(STORAGE_KEY)) {
-      const newTheme = e.matches ? 'light' : 'dark';
-      applyTheme(newTheme);
-      updateButtonIcon(newTheme);
+      applyTheme(e.matches);
     }
   });
 }
