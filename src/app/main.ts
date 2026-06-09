@@ -4,10 +4,14 @@ import { loadProjects } from '@widgets/projects/projects';
 import { initModal } from '@widgets/modal/modal';
 import { initContactForm } from '@features/contact-form/contact-form';
 import { initScrollReveal } from '@features/scroll-reveal/scroll-reveal';
+import { initBackToTop } from '@features/back-to-top';
+import { initReadingProgress } from '@features/reading-progress';
 
 initHeader();
 initModal();
 initScrollReveal();
+initBackToTop();
+initReadingProgress();
 
 if (document.getElementById('projects-container')) {
   loadProjects('#projects-container');

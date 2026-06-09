@@ -22,6 +22,10 @@
     />
   </head>
   <body>
+    <div class="fixed top-0 left-0 right-0 h-1 z-[100] overflow-hidden">
+      <div id="reading-progress" class="h-full bg-gradient-to-r from-accent via-accent-strong to-accent transition-all duration-100 ease-linear [background-size:200%_100%] animate-[gradient-flow_3s_linear_infinite]" style="width: 0%;"></div>
+    </div>
+
     <!-- inject:header -->
 
     <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
@@ -81,6 +85,10 @@
     </main>
 
     <!-- inject:footer -->
+
+    <button id="back-to-top" class="fixed bottom-6 right-6 p-3 bg-surface border border-line rounded-full shadow-lg text-accent hover:bg-surface-2 transition-all duration-300 hidden items-center justify-center z-50 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-accent" aria-label="Back to top">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
 
     <script type="module" src="/src/app/main.ts"></script>
   </body>
