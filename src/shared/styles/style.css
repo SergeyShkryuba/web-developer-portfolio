@@ -594,28 +594,28 @@ body {
   display: none;
 }
 
-.reveal {
+@utility reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
   will-change: opacity, transform;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal--fade {
+@utility reveal--fade {
   transform: none;
-}
 
-.reveal--fade.is-visible {
-  transform: none;
+  &.is-visible {
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  @utility reveal {
     opacity: 1;
     transform: none;
     transition: none;
