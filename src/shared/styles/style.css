@@ -645,7 +645,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  @utility reveal {
+  .reveal {
     opacity: 1;
     transform: none;
     transition: none;
