@@ -113,10 +113,6 @@ function buildFeaturedCard(project: Project): HTMLElement {
   article.addEventListener('click', open);
   article.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
 
-  const open = () => window.openProjectModal(article, { title: project.title, description: project.description });
-  article.addEventListener('click', open);
-  article.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
-
   article.appendChild(preview);
   article.appendChild(body);
 
