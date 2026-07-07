@@ -13,6 +13,7 @@ A modern, responsive portfolio website built with Vite, TypeScript, and Tailwind
 ## What we're building
 
 A complete personal portfolio site with:
+
 - Hero section introducing you quickly
 - About section with deeper background
 - Skills section organized by category

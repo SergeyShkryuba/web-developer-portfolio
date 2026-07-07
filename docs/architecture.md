@@ -5,6 +5,7 @@ WebFolio uses **Feature-Sliced Design (FSD)**, a vertical slicing architecture t
 ## The Six Layers (bottom to top)
 
 ### 1. `shared/`
+
 **What lives here:** Low-level utilities, configs, styles, and constants shared across the entire app — things with **no dependencies** on domain logic.
 
 **Examples:** `CONFIG`, helper functions, global CSS, reusable UI utilities, date formatters.
@@ -16,6 +17,7 @@ WebFolio uses **Feature-Sliced Design (FSD)**, a vertical slicing architecture t
 ---
 
 ### 2. `entities/`
+
 **What lives here:** Core business objects and models — the "nouns" of your app. Entities have no side effects; they're pure data structures and their methods.
 
 **Examples:** A `User` entity with a `getName()` method, a `Portfolio` data structure, a `Project` model.
@@ -27,6 +29,7 @@ WebFolio uses **Feature-Sliced Design (FSD)**, a vertical slicing architecture t
 ---
 
 ### 3. `features/`
+
 **What lives here:** User-facing business logic — features that users interact with. A feature wraps entities and provides use cases. Features are self-contained and reusable.
 
 **Examples:** "Contact form submission", "load projects from JSON", "open project in modal".
@@ -38,6 +41,7 @@ WebFolio uses **Feature-Sliced Design (FSD)**, a vertical slicing architecture t
 ---
 
 ### 4. `widgets/`
+
 **What lives here:** Reusable UI components that wrap features and entities. Widgets are "smart" — they contain logic — but they're **composable and feature-agnostic**.
 
 **Examples:** A `Header` widget, a `Footer` widget, a `ProjectCard` widget that displays a project.
@@ -49,6 +53,7 @@ WebFolio uses **Feature-Sliced Design (FSD)**, a vertical slicing architecture t
 ---
 
 ### 5. `pages/`
+
 **What lives here:** Page-level components that assemble features and widgets into complete pages. Each page is a route.
 
 **Examples:** Home page, About page, Contact page.
@@ -60,6 +65,7 @@ WebFolio uses **Feature-Sliced Design (FSD)**, a vertical slicing architecture t
 ---
 
 ### 6. `app/`
+
 **What lives here:** The app-level entry point. Global setup, initialization, root styles, and the render target.
 
 **Examples:** `main.ts` (the script tag in HTML), global error handling, app startup logic.

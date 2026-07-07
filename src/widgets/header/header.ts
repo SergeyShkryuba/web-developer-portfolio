@@ -23,7 +23,7 @@ export class Header {
       this.burger.addEventListener('click', () => this.toggleMenu());
     }
 
-    this.links.forEach(link => {
+    this.links.forEach((link) => {
       link.addEventListener('click', () => this.closeMenu());
     });
 
@@ -60,7 +60,7 @@ export class Header {
       else pageName = 'home';
     }
 
-    this.links.forEach(link => {
+    this.links.forEach((link) => {
       const linkPage = link.getAttribute('data-page');
       if (linkPage === pageName) {
         link.classList.add('text-blue-600');
