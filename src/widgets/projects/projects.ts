@@ -9,6 +9,8 @@ interface Project {
   preview?: string;
 }
 
+import projectsData from './projects.json';
+
 export async function loadProjects(containerSelector: string): Promise<void> {
   const container = document.querySelector(containerSelector);
   if (!container) return;
@@ -19,10 +21,7 @@ export async function loadProjects(containerSelector: string): Promise<void> {
   container.appendChild(loading);
 
   try {
-    const response = await fetch('/src/widgets/projects/projects.json');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const projects: Project[] = await response.json();
+    const projects: Project[] = projectsData as Project[];
     loading.remove();
 
     if (projects.length === 0) {
