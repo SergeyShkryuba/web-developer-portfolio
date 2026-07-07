@@ -14,14 +14,25 @@
     <meta name="twitter:title" content="Contact — Serhii Shkriuba" />
     <meta name="twitter:description" content="Get in touch with Serhii Shkriuba, junior web developer. Open to internships and junior roles." />
     <meta name="twitter:image" content="/og-image.png" />
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
   </head>
   <body>
+    <div id="preloader" class="fixed inset-0 bg-bg grid place-items-center z-[9999] transition-opacity duration-500 ease-out [&.hidden]:opacity-0 [&.hidden]:invisible [&.hidden]:pointer-events-none">
+      <div class="w-12 h-12 border-[3px] border-line border-t-accent rounded-full animate-spin motion-reduce:animate-pulse" role="status" aria-label="Loading"></div>
+    </div>
     <div class="fixed top-0 left-0 right-0 h-1 z-[100] overflow-hidden">
       <div id="reading-progress" class="h-full bg-gradient-to-r from-accent via-accent-strong to-accent transition-all duration-100 ease-linear [background-size:200%_100%] animate-[gradient-flow_3s_linear_infinite]" style="width: 0%;"></div>
     </div>
