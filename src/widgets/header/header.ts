@@ -86,9 +86,9 @@ export class Header {
     this.links.forEach((link) => {
       const linkPage = link.getAttribute('data-page');
       if (linkPage === pageName) {
-        link.classList.add('text-blue-600');
+        link.classList.add('text-accent');
       } else {
-        link.classList.remove('text-blue-600');
+        link.classList.remove('text-accent');
       }
     });
   }
