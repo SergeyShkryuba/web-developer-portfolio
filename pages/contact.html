@@ -14,6 +14,13 @@
     <meta name="twitter:title" content="Contact — Serhii Shkriuba" />
     <meta name="twitter:description" content="Get in touch with Serhii Shkriuba, junior web developer. Open to internships and junior roles." />
     <meta name="twitter:image" content="/og-image.png" />
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
