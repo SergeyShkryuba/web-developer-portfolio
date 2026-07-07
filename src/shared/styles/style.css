@@ -584,3 +584,12 @@ body {
   margin-top: 0.5rem;
   max-width: 60ch;
 }
+
+.project {
+  cursor: pointer;
+}
+
+#project-modal.hidden,
+#modal-overlay.hidden {
+  display: none;
+}
