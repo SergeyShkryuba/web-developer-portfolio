@@ -606,7 +606,7 @@ body {
   }
 }
 
-@utility reveal-fade {
+@utility reveal--fade {
   transform: none;
 
   &.is-visible {
@@ -615,7 +615,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  @utility reveal {
     opacity: 1;
     transform: none;
     transition: none;

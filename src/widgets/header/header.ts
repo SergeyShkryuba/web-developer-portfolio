@@ -55,12 +55,32 @@ export class Header {
   private setActivePage(pageName?: string): void {
     if (!pageName) {
       const path = window.location.pathname;
-      if (path.includes('about')) pageName = 'about';
-      else if (path.includes('skills')) pageName = 'skills';
-      else if (path.includes('projects')) pageName = 'projects';
-      else if (path.includes('experience')) pageName = 'experience';
-      else if (path.includes('contact')) pageName = 'contact';
-      else pageName = 'home';
+      const hash = window.location.hash;
+
+      const pageMap: Record<string, string> = {
+        '/': 'home',
+        '/index.html': 'home',
+        '/pages/about.html': 'about',
+        '/pages/contact.html': 'contact',
+      };
+
+      pageName = pageMap[path] || 'home';
+
+      if (pageName === 'home' && hash) {
+        const section = hash.replace('#', '');
+        const validSections = ['about', 'skills', 'projects', 'experience'];
+        if (validSections.includes(section)) {
+          this.links.forEach((link) => {
+            const linkPage = link.getAttribute('data-page');
+            if (linkPage === section) {
+              link.classList.add('text-blue-600');
+            } else if (linkPage !== 'home') {
+              link.classList.remove('text-blue-600');
+            }
+          });
+          return;
+        }
+      }
     }
 
     const links = document.querySelectorAll('[data-page]');
