@@ -27,8 +27,13 @@
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
   </head>
   <body>
+    <div id="preloader" class="fixed inset-0 bg-bg grid place-items-center z-[9999] transition-opacity duration-500 ease-out [&.hidden]:opacity-0 [&.hidden]:invisible [&.hidden]:pointer-events-none">
+      <div class="w-12 h-12 border-[3px] border-line border-t-accent rounded-full animate-spin motion-reduce:animate-pulse" role="status" aria-label="Loading"></div>
+    </div>
+
     <!-- inject:header -->
 
     <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
