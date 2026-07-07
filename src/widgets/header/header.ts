@@ -1,55 +1,55 @@
+import { Menu } from './menu';
+
 interface HeaderOptions {
   activePage?: string;
 }
 
+const NAV_LINKS = [
+  { href: '/', text: 'Home', id: 'home' },
+  { href: '/#about', text: 'About', id: 'about' },
+  { href: '/#skills', text: 'Skills', id: 'skills' },
+  { href: '/#projects', text: 'Projects', id: 'projects' },
+  { href: '/#experience', text: 'Experience', id: 'experience' },
+  { href: '/pages/contact.html', text: 'Contact', id: 'contact' },
+];
+
 export class Header {
-  private header: HTMLElement | null;
-  private burger: HTMLElement | null;
-  private mobileMenu: HTMLElement | null;
-  private links: NodeListOf<HTMLElement>;
+  private menu: Menu;
 
   constructor(options: HeaderOptions = {}) {
-    this.header = document.querySelector('.header');
-    this.burger = document.querySelector('#burger');
-    this.mobileMenu = document.querySelector('#mobile-menu');
-    this.links = document.querySelectorAll('[data-page]');
-
-    this.init();
+    this.renderLinks();
+    this.menu = new Menu('.header', '#burger', '#mobile-menu');
     this.setActivePage(options.activePage);
+    this.bindLinkClicks();
   }
 
-  private init(): void {
-    if (this.burger && this.mobileMenu) {
-      this.burger.addEventListener('click', () => this.toggleMenu());
+  private renderLinks(): void {
+    const desktopNav = document.querySelector('#desktop-nav');
+    const mobileNav = document.querySelector('#mobile-nav');
+
+    if (desktopNav) {
+      desktopNav.innerHTML = NAV_LINKS.map(link => `
+        <a href="${link.href}" class="px-4 py-2 text-ink hover:text-accent font-medium transition-colors relative group" data-page="${link.id}">
+          ${link.text}
+          <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+        </a>
+      `).join('');
     }
 
-    this.links.forEach((link) => {
-      link.addEventListener('click', () => this.closeMenu());
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        this.closeMenu();
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (this.header && !this.header.contains(e.target as Node)) {
-        this.closeMenu();
-      }
-    });
+    if (mobileNav) {
+      mobileNav.innerHTML = NAV_LINKS.map(link => `
+        <a href="${link.href}" class="block px-4 py-2 text-ink hover:text-accent hover:bg-surface-2 rounded-lg font-medium" data-page="${link.id}">
+          ${link.text}
+        </a>
+      `).join('');
+    }
   }
 
-  private toggleMenu(): void {
-    this.mobileMenu?.classList.toggle('hidden');
-    this.burger?.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
-  }
-
-  private closeMenu(): void {
-    this.mobileMenu?.classList.add('hidden');
-    this.burger?.classList.remove('active');
-    document.body.classList.remove('menu-open');
+  private bindLinkClicks(): void {
+    const links = document.querySelectorAll('[data-page]');
+    links.forEach((link) => {
+      link.addEventListener('click', () => this.menu.closeMenu());
+    });
   }
 
   private setActivePage(pageName?: string): void {
@@ -83,7 +83,8 @@ export class Header {
       }
     }
 
-    this.links.forEach((link) => {
+    const links = document.querySelectorAll('[data-page]');
+    links.forEach((link) => {
       const linkPage = link.getAttribute('data-page');
       if (linkPage === pageName) {
         link.classList.add('text-accent');

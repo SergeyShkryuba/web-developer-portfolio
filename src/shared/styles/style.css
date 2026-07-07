@@ -58,7 +58,7 @@ body {
   padding-inline: clamp(1rem, 0.5rem + 2vw, 2rem);
 }
 
-.btn {
+@utility btn {
   display: inline-flex;
   align-items: center;
   gap: 0.55em;
@@ -75,28 +75,28 @@ body {
   color: var(--color-on-accent);
   transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out),
     transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+
+  &:hover {
+    background: transparent;
+    color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
-.btn:hover {
-  background: transparent;
-  color: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-.btn:active {
-  transform: translateY(0);
-}
-
-.btn--ghost {
+@utility btn-ghost {
   background: transparent;
   color: var(--color-ink);
   border-color: var(--color-line);
-}
 
-.btn--ghost:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  background: transparent;
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: transparent;
+  }
 }
 
 .hero {
@@ -375,7 +375,7 @@ body {
   padding: 0;
 }
 
-.chip {
+@utility chip {
   padding: 0.45rem 0.85rem;
   background: var(--color-bg);
   border: 1px solid var(--color-line);
@@ -384,12 +384,12 @@ body {
   font-weight: 500;
   transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out),
     transform 0.2s var(--ease-out);
-}
 
-.chip:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  transform: translateY(-2px);
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-2px);
+  }
 }
 
 .projects__list {
