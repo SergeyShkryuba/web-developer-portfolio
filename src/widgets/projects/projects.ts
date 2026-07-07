@@ -40,13 +40,13 @@ export async function loadProjects(containerSelector: string): Promise<void> {
     const rest = projects.filter((p) => !p.featured);
 
     if (featured) {
-      list.appendChild(buildFeaturedCard(featured));
+      list.appendChild(buildCard(featured, true));
     }
 
     if (rest.length > 0) {
       const grid = document.createElement('div');
       grid.className = 'projects__grid';
-      rest.forEach((p) => grid.appendChild(buildCard(p)));
+      rest.forEach((p) => grid.appendChild(buildCard(p, false)));
       list.appendChild(grid);
     }
 
@@ -60,9 +60,9 @@ export async function loadProjects(containerSelector: string): Promise<void> {
   }
 }
 
-function buildFeaturedCard(project: Project): HTMLElement {
+function buildCard(project: Project, isFeatured: boolean): HTMLElement {
   const article = document.createElement('article');
-  article.className = 'project project--featured';
+  article.className = `project ${isFeatured ? 'project--featured' : ''}`.trim();
   article.tabIndex = 0;
   article.setAttribute('role', 'button');
   article.setAttribute('aria-label', `Open details for ${project.title}`);
@@ -114,7 +114,7 @@ function buildFeaturedCard(project: Project): HTMLElement {
 
   const sourceLink = document.createElement('a');
   sourceLink.href = project.links.source;
-  sourceLink.textContent = 'GitHub →';
+  sourceLink.textContent = isFeatured ? 'GitHub →' : 'Code →';
   if (project.links.source.startsWith('http')) {
     sourceLink.target = '_blank';
     sourceLink.rel = 'noopener noreferrer';
@@ -128,93 +128,24 @@ function buildFeaturedCard(project: Project): HTMLElement {
   body.appendChild(tags);
   body.appendChild(links);
 
-  const open = () => window.openProjectModal(article, { title: project.title, description: project.description });
+  const open = () => {
+    if (isExternal) {
+      window.open(project.links.demo, '_blank', 'noopener,noreferrer');
+    } else {
+      window.openProjectModal(article, { title: project.title, description: project.description });
+    }
+  };
+
   article.addEventListener('click', (e) => {
     if (e.target instanceof HTMLElement && e.target.closest('a')) return;
     open();
   });
-  article.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
-
-  article.appendChild(preview);
-  article.appendChild(body);
-
-  return article;
-}
-
-function buildCard(project: Project): HTMLElement {
-  const article = document.createElement('article');
-  article.className = 'project';
-  article.tabIndex = 0;
-  article.setAttribute('role', 'button');
-  article.setAttribute('aria-label', `Open details for ${project.title}`);
-
-  const preview = document.createElement('div');
-  preview.className = 'project__preview';
-  preview.setAttribute('aria-hidden', 'true');
-  if (project.preview) {
-    const img = document.createElement('img');
-    img.src = project.preview;
-    img.alt = project.previewLabel;
-    img.className = 'project__preview-img';
-    preview.appendChild(img);
-  } else {
-    preview.textContent = project.previewLabel;
-  }
-
-  const body = document.createElement('div');
-  body.className = 'project__body';
-
-  const title = document.createElement('h3');
-  title.className = 'project__title';
-  title.textContent = project.title;
-
-  const desc = document.createElement('p');
-  desc.className = 'project__desc';
-  desc.textContent = project.description;
-
-  const tags = document.createElement('ul');
-  tags.className = 'project__tags';
-  project.tags.forEach((tag) => {
-    const li = document.createElement('li');
-    li.textContent = tag;
-    tags.appendChild(li);
+  article.addEventListener('keydown', (e) => { 
+    if (e.key === 'Enter' || e.key === ' ') { 
+      e.preventDefault(); 
+      open(); 
+    } 
   });
-
-  const links = document.createElement('div');
-  links.className = 'project__links';
-
-  const isExternal = project.links.demo.startsWith('http');
-
-  const demoLink = document.createElement('a');
-  demoLink.href = project.links.demo;
-  demoLink.textContent = isExternal ? 'Live demo ↗' : 'Live demo →';
-  if (isExternal) {
-    demoLink.target = '_blank';
-    demoLink.rel = 'noopener noreferrer';
-  }
-
-  const sourceLink = document.createElement('a');
-  sourceLink.href = project.links.source;
-  sourceLink.textContent = 'Code →';
-  if (project.links.source.startsWith('http')) {
-    sourceLink.target = '_blank';
-    sourceLink.rel = 'noopener noreferrer';
-  }
-
-  links.appendChild(demoLink);
-  links.appendChild(sourceLink);
-
-  body.appendChild(title);
-  body.appendChild(desc);
-  body.appendChild(tags);
-  body.appendChild(links);
-
-  const open = () => window.openProjectModal(article, { title: project.title, description: project.description });
-  article.addEventListener('click', (e) => {
-    if (e.target instanceof HTMLElement && e.target.closest('a')) return;
-    open();
-  });
-  article.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
 
   article.appendChild(preview);
   article.appendChild(body);
