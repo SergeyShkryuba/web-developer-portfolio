@@ -1,52 +1,81 @@
-# WebFolio — Personal Portfolio Site
+# Portfolio — Sergey Shkryuba
 
-A modern, responsive portfolio website built with Vite, TypeScript, and Tailwind CSS. Currently a work-in-progress foundation; the goal is to turn this into a fully-featured portfolio that showcases your work, skills, and experience.
+A multi-page static portfolio site built with Vite, TypeScript (strict) and
+Tailwind CSS v4, organised along feature-sliced lines. No framework: everything
+below is plain DOM code, which is the point — the site is also the sample.
 
-## What's here today
+|           |                                                                                |
+| --------- | ------------------------------------------------------------------------------ |
+| **Live**  | https://web-developer-portfolio-delta-navy.vercel.app                          |
+| **Stack** | Vite 8 · TypeScript 6 (strict) · Tailwind CSS v4 · Vitest · ESLint · Prettier  |
+| **CI**    | Typecheck, lint, format check, unit tests and a production build on every push |
 
-- **Multi-page structure** — Home, About, and Contact pages ready for content
-- **Responsive design** — Built with Tailwind CSS and mobile-first approach
-- **Header widget** — Navigation with mobile menu toggle and active-link highlighting
-- **TypeScript support** — Type-safe development for all components
-- **Vite-powered** — Fast development server and optimized builds
+## Structure
 
-## What we're building
-
-A complete personal portfolio site with:
-
-- Hero section introducing you quickly
-- About section with deeper background
-- Skills section organized by category
-- Projects section loaded from JSON, with modal previews
-- Experience timeline
-- Functional contact form with validation and async states
-- Social meta tags for sharing
-- Optimized performance and accessibility
-
-## Getting started
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm build
-
-# Preview production build
-npm run preview
+```
+src/
+  app/        entry point and wiring
+  widgets/    header, footer, projects, modal
+  features/   theme switcher, contact form, scroll reveal, back-to-top, …
+  shared/     design tokens and global styles
+pages/        about.html, contact.html
+tests/        Vitest specs
 ```
 
-The site will be available at `http://localhost:5173` (or the URL shown in your terminal).
+Header and footer live in `src/widgets/*/**.html` and are injected into every
+page at build time by `vite-plugins/html-inject.js`, so the markup exists once.
 
-## Project structure
+## Notable details
 
-This project uses **Feature-Sliced Design (FSD)**, organizing code into layers: `app` (core app logic), `pages` (page components), `widgets` (reusable UI blocks), `features` (user-facing functionality), `entities` (domain models), and `shared` (utilities, config, styles). Each layer only imports from lower layers, keeping dependencies clear and preventing circular imports.
+- **Strict TypeScript that is actually enforced.** `npm run typecheck` runs in
+  CI with `noUncheckedIndexedAccess`, `noUnusedLocals` and friends on. (It had
+  to be turned on: the project was configured as TypeScript but nothing ever
+  ran the compiler, and about twenty type errors had accumulated behind it.)
+- **No flash of the wrong theme.** The theme is applied by a tiny inline script
+  in `<head>`, before first paint, rather than after the bundle loads.
+- **Accessible project modal** with a focus trap, Escape handling and focus
+  restored to the control that opened it.
+- **Self-hosted fonts** via `@fontsource-variable`, so no render-blocking
+  request to a third party and no visitor IP leaving for Google.
+- **Reduced-motion aware** — animations degrade under
+  `prefers-reduced-motion`.
 
-See [docs/architecture.md](./docs/architecture.md) for a detailed explanation of each layer and import rules.
+## Contact form
 
-## How to contribute
+The form posts JSON to whatever endpoint `VITE_CONTACT_ENDPOINT` names
+(Formspree, Web3Forms, a serverless function — anything that accepts a POST).
 
-Each task is tracked as a GitHub issue. Check the issue for what needs to be done, create a feature branch, make changes following the FSD layout, and open a pull request.
+```bash
+cp .env.example .env
+# then set VITE_CONTACT_ENDPOINT
+```
+
+With no endpoint configured the form does **not** claim success: it reports the
+failure and points the visitor at the email address. That is deliberate — the
+previous implementation was a mock that resolved on `Math.random() > 0.5`.
+
+## Projects data
+
+`src/widgets/projects/projects.json` is the single source of truth for the
+projects section. Each entry needs `id`, `title`, `description`, `tags`,
+`links.source` and `previewLabel`; `links.demo` and `preview` are optional, and
+a project without a demo simply does not render a demo link. A test asserts
+that every URL in the file is a real `https://` link, so a placeholder `#`
+cannot reach production again.
+
+## Scripts
+
+| Command             | What it does                  |
+| ------------------- | ----------------------------- |
+| `npm run dev`       | Dev server                    |
+| `npm run build`     | Production build into `dist/` |
+| `npm run preview`   | Serve the built output        |
+| `npm run typecheck` | `tsc --noEmit`                |
+| `npm run lint`      | ESLint                        |
+| `npm run format`    | Prettier, writing changes     |
+| `npm test`          | Vitest                        |
+| `npm run verify`    | Everything above, in CI order |
+
+## Licence
+
+MIT

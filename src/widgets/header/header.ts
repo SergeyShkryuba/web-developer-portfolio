@@ -28,20 +28,24 @@ export class Header {
     const mobileNav = document.querySelector('#mobile-nav');
 
     if (desktopNav) {
-      desktopNav.innerHTML = NAV_LINKS.map(link => `
+      desktopNav.innerHTML = NAV_LINKS.map(
+        (link) => `
         <a href="${link.href}" class="px-4 py-2 text-ink hover:text-accent font-medium transition-colors relative group" data-page="${link.id}">
           ${link.text}
           <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
         </a>
-      `).join('');
+      `
+      ).join('');
     }
 
     if (mobileNav) {
-      mobileNav.innerHTML = NAV_LINKS.map(link => `
+      mobileNav.innerHTML = NAV_LINKS.map(
+        (link) => `
         <a href="${link.href}" class="block px-4 py-2 text-ink hover:text-accent hover:bg-surface-2 rounded-lg font-medium" data-page="${link.id}">
           ${link.text}
         </a>
-      `).join('');
+      `
+      ).join('');
     }
   }
 
@@ -70,12 +74,15 @@ export class Header {
         const section = hash.replace('#', '');
         const validSections = ['about', 'skills', 'projects', 'experience'];
         if (validSections.includes(section)) {
-          this.links.forEach((link) => {
+          // `this.links` never existed, so following a hash link threw
+          // "Cannot read properties of undefined". The highlight colour was
+          // also `text-blue-600`, which is not a token in this theme.
+          document.querySelectorAll('[data-page]').forEach((link) => {
             const linkPage = link.getAttribute('data-page');
             if (linkPage === section) {
-              link.classList.add('text-blue-600');
+              link.classList.add('text-accent');
             } else if (linkPage !== 'home') {
-              link.classList.remove('text-blue-600');
+              link.classList.remove('text-accent');
             }
           });
           return;
