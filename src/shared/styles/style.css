@@ -7,12 +7,12 @@
   --color-ink: oklch(0.97 0.006 250);
   --color-muted: oklch(0.72 0.012 255);
   --color-line: oklch(0.34 0.012 260);
-  --color-accent: oklch(0.88 0.20 128);
+  --color-accent: oklch(0.88 0.2 128);
   --color-accent-strong: oklch(0.83 0.21 128);
   --color-on-accent: oklch(0.18 0.04 145);
 
-  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
-  --font-body: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk Variable', system-ui, sans-serif;
 
   --radius-sm: 6px;
   --radius-md: 8px;
@@ -24,21 +24,26 @@
   --color-bg: oklch(0.98 0.002 260);
   --color-surface: oklch(0.96 0.003 260);
   --color-surface-2: oklch(0.93 0.004 260);
-  --color-ink: oklch(0.20 0.015 260);
-  --color-muted: oklch(0.50 0.010 260);
+  --color-ink: oklch(0.2 0.015 260);
+  --color-muted: oklch(0.5 0.01 260);
   --color-line: oklch(0.85 0.005 260);
   --color-accent: oklch(0.65 0.18 140);
-  --color-accent-strong: oklch(0.55 0.20 140);
+  --color-accent-strong: oklch(0.55 0.2 140);
   --color-on-accent: oklch(0.98 0.002 140);
 }
 
 html {
   scroll-behavior: smooth;
-  transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  transition:
+    background-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out);
 }
 
 html * {
-  transition: background-color 0.3s var(--ease-out), border-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  transition:
+    background-color 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out),
+    color 0.3s var(--ease-out);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -95,8 +100,11 @@ body {
   cursor: pointer;
   background: var(--color-accent);
   color: var(--color-on-accent);
-  transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out),
-    transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+  transition:
+    background 0.2s var(--ease-out),
+    color 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out),
+    box-shadow 0.2s var(--ease-out);
 
   &:hover {
     background: transparent;
@@ -404,7 +412,9 @@ body {
   border-radius: 999px;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out),
+  transition:
+    border-color 0.2s var(--ease-out),
+    color 0.2s var(--ease-out),
     transform 0.2s var(--ease-out);
 
   &:hover {
@@ -426,7 +436,9 @@ body {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   overflow: hidden;
-  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out),
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out),
     border-color 0.25s var(--ease-out);
 }
 
@@ -461,7 +473,8 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(oklch(0.88 0.2 128 / 0.07) 1px, transparent 1px),
+  background-image:
+    linear-gradient(oklch(0.88 0.2 128 / 0.07) 1px, transparent 1px),
     linear-gradient(90deg, oklch(0.88 0.2 128 / 0.07) 1px, transparent 1px);
   background-size: 30px 30px;
 }
@@ -477,6 +490,28 @@ body {
   font-size: 1.35rem;
   font-family: var(--font-display);
   font-weight: 700;
+}
+
+/* The heading doubles as the "open details" control, so it has to look like a
+   heading and behave like a button. */
+.project__title-btn {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.project__title-btn:hover {
+  color: var(--color-accent);
+}
+
+.project__title-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 .project__desc {
@@ -627,7 +662,9 @@ body {
 @utility reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
   will-change: opacity, transform;
 
   &.is-visible {
@@ -654,6 +691,11 @@ body {
 }
 
 @keyframes gradient-flow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }

@@ -9,6 +9,6 @@ export function initPreloader(): void {
   };
 
   if (document.readyState === 'complete') return hidePreloader();
-  
+
   window.addEventListener('load', hidePreloader);
 }

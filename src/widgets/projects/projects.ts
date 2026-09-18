@@ -1,70 +1,70 @@
-interface Project {
+import projectsData from './projects.json';
+
+export interface Project {
   id: string;
   title: string;
   description: string;
   tags: string[];
-  links: { demo: string; source: string };
+  /** `demo` is optional: not every project is deployed anywhere. */
+  links: { demo?: string; source: string };
   featured: boolean;
   previewLabel: string;
   preview?: string;
 }
 
-import projectsData from './projects.json';
+export function getProjects(): Project[] {
+  return projectsData as Project[];
+}
 
 export async function loadProjects(containerSelector: string): Promise<void> {
   const container = document.querySelector(containerSelector);
   if (!container) return;
 
-  const loading = document.createElement('p');
-  loading.className = 'text-muted';
-  loading.textContent = 'Loading projects…';
-  container.appendChild(loading);
+  const projects = getProjects();
 
-  try {
-    const projects: Project[] = projectsData as Project[];
-    loading.remove();
-
-    if (projects.length === 0) {
-      const empty = document.createElement('p');
-      empty.className = 'text-muted';
-      empty.textContent = 'No projects yet.';
-      container.appendChild(empty);
-      return;
-    }
-
-    const list = document.createElement('div');
-    list.className = 'projects__list';
-
-    const featured = projects.find((p) => p.featured);
-    const rest = projects.filter((p) => !p.featured);
-
-    if (featured) {
-      list.appendChild(buildCard(featured, true));
-    }
-
-    if (rest.length > 0) {
-      const grid = document.createElement('div');
-      grid.className = 'projects__grid';
-      rest.forEach((p) => grid.appendChild(buildCard(p, false)));
-      list.appendChild(grid);
-    }
-
-    container.appendChild(list);
-  } catch {
-    loading.remove();
-    const error = document.createElement('p');
-    error.className = 'text-muted';
-    error.textContent = 'Failed to load projects. Please try again later.';
-    container.appendChild(error);
+  if (projects.length === 0) {
+    const empty = document.createElement('p');
+    empty.className = 'text-muted';
+    empty.textContent = 'No projects yet.';
+    container.appendChild(empty);
+    return;
   }
+
+  const list = document.createElement('div');
+  list.className = 'projects__list';
+
+  const featured = projects.find((p) => p.featured);
+  const rest = projects.filter((p) => !p.featured);
+
+  if (featured) {
+    list.appendChild(buildCard(featured, true));
+  }
+
+  if (rest.length > 0) {
+    const grid = document.createElement('div');
+    grid.className = 'projects__grid';
+    rest.forEach((p) => grid.appendChild(buildCard(p, false)));
+    list.appendChild(grid);
+  }
+
+  container.appendChild(list);
 }
 
-function buildCard(project: Project, isFeatured: boolean): HTMLElement {
+function externalLink(href: string, text: string, className: string): HTMLAnchorElement {
+  const a = document.createElement('a');
+  a.href = href;
+  a.textContent = text;
+  a.className = className;
+  if (href.startsWith('http')) {
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+  }
+  return a;
+}
+
+export function buildCard(project: Project, isFeatured: boolean): HTMLElement {
   const article = document.createElement('article');
   article.className = `project ${isFeatured ? 'project--featured' : ''}`.trim();
-  article.tabIndex = 0;
-  article.setAttribute('role', 'button');
-  article.setAttribute('aria-label', `Open details for ${project.title}`);
 
   const preview = document.createElement('div');
   preview.className = 'project__preview';
@@ -72,7 +72,9 @@ function buildCard(project: Project, isFeatured: boolean): HTMLElement {
   if (project.preview) {
     const img = document.createElement('img');
     img.src = project.preview;
-    img.alt = project.previewLabel;
+    img.alt = '';
+    img.setAttribute('loading', 'lazy');
+    img.setAttribute('decoding', 'async');
     img.className = 'project__preview-img';
     preview.appendChild(img);
   } else {
@@ -82,9 +84,23 @@ function buildCard(project: Project, isFeatured: boolean): HTMLElement {
   const body = document.createElement('div');
   body.className = 'project__body';
 
+  // The card used to be `role="button"` with links inside it — nested
+  // interactive elements, which screen readers and keyboard users both handle
+  // badly. Now the heading carries the only "open details" control.
   const title = document.createElement('h3');
   title.className = 'project__title';
-  title.textContent = project.title;
+
+  const detailsBtn = document.createElement('button');
+  detailsBtn.type = 'button';
+  detailsBtn.className = 'project__title-btn';
+  detailsBtn.textContent = project.title;
+  detailsBtn.addEventListener('click', () => {
+    window.openProjectModal(detailsBtn, {
+      title: project.title,
+      description: project.description,
+    });
+  });
+  title.appendChild(detailsBtn);
 
   const desc = document.createElement('p');
   desc.className = 'project__desc';
@@ -92,6 +108,7 @@ function buildCard(project: Project, isFeatured: boolean): HTMLElement {
 
   const tags = document.createElement('ul');
   tags.className = 'project__tags';
+  tags.setAttribute('aria-label', `Technologies used in ${project.title}`);
   project.tags.forEach((tag) => {
     const li = document.createElement('li');
     li.textContent = tag;
@@ -101,53 +118,17 @@ function buildCard(project: Project, isFeatured: boolean): HTMLElement {
   const links = document.createElement('div');
   links.className = 'project__links';
 
-  const isExternal = project.links.demo.startsWith('http');
-
-  const demoLink = document.createElement('a');
-  demoLink.href = project.links.demo;
-  demoLink.textContent = isExternal ? 'Live demo ↗' : 'Live demo →';
-  if (isExternal) {
-    demoLink.target = '_blank';
-    demoLink.rel = 'noopener noreferrer';
+  // A "Live demo" link pointing at "#" used to be rendered for every project
+  // without a deployment, which looked broken when clicked.
+  if (project.links.demo) {
+    links.appendChild(externalLink(project.links.demo, 'Live demo ↗', 'project__link'));
   }
+  links.appendChild(
+    externalLink(project.links.source, isFeatured ? 'GitHub ↗' : 'Code ↗', 'project__link')
+  );
 
-  const sourceLink = document.createElement('a');
-  sourceLink.href = project.links.source;
-  sourceLink.textContent = isFeatured ? 'GitHub →' : 'Code →';
-  if (project.links.source.startsWith('http')) {
-    sourceLink.target = '_blank';
-    sourceLink.rel = 'noopener noreferrer';
-  }
-
-  links.appendChild(demoLink);
-  links.appendChild(sourceLink);
-
-  body.appendChild(title);
-  body.appendChild(desc);
-  body.appendChild(tags);
-  body.appendChild(links);
-
-  const open = () => {
-    if (isExternal) {
-      window.open(project.links.demo, '_blank', 'noopener,noreferrer');
-    } else {
-      window.openProjectModal(article, { title: project.title, description: project.description });
-    }
-  };
-
-  article.addEventListener('click', (e) => {
-    if (e.target instanceof HTMLElement && e.target.closest('a')) return;
-    open();
-  });
-  article.addEventListener('keydown', (e) => { 
-    if (e.key === 'Enter' || e.key === ' ') { 
-      e.preventDefault(); 
-      open(); 
-    } 
-  });
-
-  article.appendChild(preview);
-  article.appendChild(body);
+  body.append(title, desc, tags, links);
+  article.append(preview, body);
 
   return article;
 }
