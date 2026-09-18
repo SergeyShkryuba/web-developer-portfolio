@@ -1,21 +1,20 @@
 [
   {
-    "id": "warm-corner",
-    "title": "Warm Corner coffee shop landing",
-    "description": "A responsive one-page site built from scratch: semantic markup, smooth scrolling, mobile menu. Made to lock in Flexbox and Grid on a real task.",
-    "tags": ["HTML", "CSS", "JavaScript"],
+    "id": "nexstore-ai",
+    "title": "NexStore AI — full-stack storefront",
+    "description": "An e-commerce app built with Next.js 16, React 19, TypeScript and Supabase. Catalogue search with a hand-written lexical ranker, cart, Stripe Checkout with server-side price verification, Row Level Security on every table, an admin panel, and a CI pipeline running typecheck, lint, unit tests and a production build.",
+    "tags": ["Next.js", "React", "TypeScript", "Supabase", "Stripe", "Tailwind", "Vitest"],
     "links": {
-      "demo": "#",
-      "source": "#"
+      "source": "https://github.com/SergeyShkryuba/nexstore-ai"
     },
     "featured": true,
-    "previewLabel": "Landing"
+    "previewLabel": "E-commerce"
   },
   {
     "id": "modern-js-todo",
     "title": "Modern JS Todo",
-    "description": "A feature-rich todo app with dark mode, local storage persistence, task filtering by priority and category, search, and edit functionality. Built with vanilla JavaScript.",
-    "tags": ["JavaScript", "LocalStorage", "Dark Mode", "DOM"],
+    "description": "A todo app in vanilla JavaScript: dark mode, persistence in localStorage, filtering by priority and category, search and inline editing. Written without a framework to work through DOM APIs and state management by hand.",
+    "tags": ["JavaScript", "LocalStorage", "DOM", "Vite"],
     "links": {
       "demo": "https://sergeyshkryuba.github.io/modern-js-todo/",
       "source": "https://github.com/SergeyShkryuba/modern-js-todo"
@@ -25,15 +24,25 @@
     "preview": "/projects/todo-preview.png"
   },
   {
-    "id": "weather-widget",
-    "title": "Weather widget",
-    "description": "Pulls weather data from a public API and shows the forecast by city. A drill on working with fetch.",
-    "tags": ["JavaScript", "API"],
+    "id": "web-developer-portfolio",
+    "title": "This portfolio site",
+    "description": "Multi-page static site on Vite and Tailwind CSS v4, organised feature-sliced. TypeScript in strict mode, an accessible modal with a focus trap, theme switching without a flash of the wrong theme, and a Lighthouse budget checked in CI.",
+    "tags": ["Vite", "TypeScript", "Tailwind", "A11y", "Lighthouse"],
     "links": {
-      "demo": "#",
-      "source": "#"
+      "source": "https://github.com/SergeyShkryuba/web-developer-portfolio"
     },
     "featured": false,
-    "previewLabel": "Weather"
+    "previewLabel": "Portfolio"
+  },
+  {
+    "id": "bootstrap-landing-page",
+    "title": "Bootstrap landing page",
+    "description": "A responsive landing page built on Bootstrap with jQuery plugins and custom CSS animations. An early exercise in working inside someone else's grid system and component conventions.",
+    "tags": ["Bootstrap", "jQuery", "CSS"],
+    "links": {
+      "source": "https://github.com/SergeyShkryuba/bootstrap-landing-page"
+    },
+    "featured": false,
+    "previewLabel": "Landing"
   }
 ]

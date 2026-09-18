@@ -13,8 +13,10 @@ function toggleTheme(): void {
 }
 
 function updateButtonIcon(isLight: boolean): void {
-  const buttons = document.querySelectorAll<HTMLButtonElement>('#theme-toggle, #theme-toggle-mobile');
-  buttons.forEach(button => {
+  const buttons = document.querySelectorAll<HTMLButtonElement>(
+    '#theme-toggle, #theme-toggle-mobile'
+  );
+  buttons.forEach((button) => {
     const icon = button.querySelector('span');
     if (icon) icon.textContent = isLight ? '🌙' : '☀️';
     button.setAttribute('aria-label', `Switch to ${isLight ? 'dark' : 'light'} mode`);
@@ -23,14 +25,16 @@ function updateButtonIcon(isLight: boolean): void {
 
 export function initThemeSwitcher(): void {
   const stored = localStorage.getItem(STORAGE_KEY);
-  const prefersLight = stored 
-    ? stored === 'light' 
+  const prefersLight = stored
+    ? stored === 'light'
     : window.matchMedia('(prefers-color-scheme: light)').matches;
 
   applyTheme(prefersLight);
 
-  const buttons = document.querySelectorAll<HTMLButtonElement>('#theme-toggle, #theme-toggle-mobile');
-  buttons.forEach(button => button.addEventListener('click', toggleTheme));
+  const buttons = document.querySelectorAll<HTMLButtonElement>(
+    '#theme-toggle, #theme-toggle-mobile'
+  );
+  buttons.forEach((button) => button.addEventListener('click', toggleTheme));
 
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
     if (!localStorage.getItem(STORAGE_KEY)) {
