@@ -4,3 +4,7 @@ dist
 *.lock
 *.log
 .DS_Store
+
+# HTML partials injected at build time are fragments, not documents,
+# and Prettier cannot parse them.
+src/widgets/**/*.html

@@ -1,4 +1,9 @@
 import { initThemeSwitcher } from '@features/theme-switcher';
+// Self-hosted fonts. They used to come from fonts.googleapis.com, which cost a
+// render-blocking round trip to a third party on every page load and sent every
+// visitor's IP to Google.
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/hanken-grotesk';
 import '@shared/styles/style.css';
 import { initHeader } from '@widgets/header';
 import { loadProjects } from '@widgets/projects/projects';

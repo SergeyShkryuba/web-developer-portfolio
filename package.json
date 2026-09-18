@@ -1,7 +1,7 @@
 {
-  "name": "webfolio",
+  "name": "web-developer-portfolio",
   "version": "1.0.0",
-  "description": "",
+  "description": "Personal portfolio site: Vite, TypeScript and Tailwind CSS, built with a feature-sliced structure.",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
@@ -11,21 +11,32 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sergey Shkryuba",
+  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/hanken-grotesk": "^5.3.0",
     "@tailwindcss/vite": "^4.3.0",
+    "@types/node": "^26.6.1",
+    "@vitest/coverage-v8": "^5.0.1",
     "eslint": "^10.4.0",
     "husky": "^9.1.7",
+    "jsdom": "^30.1.0",
     "prettier": "^3.8.3",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.0",
-    "vite": "^8.0.12"
-  }
+    "vite": "^8.0.12",
+    "vitest": "^5.0.1"
+  },
+  "type": "module"
 }

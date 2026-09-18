@@ -22,11 +22,7 @@ export class Menu {
 
     document.addEventListener('click', (e) => {
       const target = e.target as Node;
-      if (
-        this.header &&
-        !this.header.contains(target) &&
-        !this.mobileMenu?.contains(target)
-      ) {
+      if (this.header && !this.header.contains(target) && !this.mobileMenu?.contains(target)) {
         this.closeMenu();
       }
     });
