@@ -5,10 +5,12 @@
     "description": "An e-commerce app built with Next.js 16, React 19, TypeScript and Supabase. Catalogue search with a hand-written lexical ranker, cart, Stripe Checkout with server-side price verification, Row Level Security on every table, an admin panel, and a CI pipeline running typecheck, lint, unit tests and a production build.",
     "tags": ["Next.js", "React", "TypeScript", "Supabase", "Stripe", "Tailwind", "Vitest"],
     "links": {
+      "demo": "https://nexstore-ai.vercel.app",
       "source": "https://github.com/SergeyShkryuba/nexstore-ai"
     },
     "featured": true,
-    "previewLabel": "E-commerce"
+    "previewLabel": "E-commerce",
+    "preview": "/projects/nexstore-preview.png"
   },
   {
     "id": "modern-js-todo",
